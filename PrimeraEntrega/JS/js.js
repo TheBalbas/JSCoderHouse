@@ -35,7 +35,6 @@ Correccion
 
 let usuario = "usuario";
 let contrasena = "admin";
-let coloresPermitidos = ["Rojo", "Negro", "Gris", "Verde", "Blanco", "rojo", "negro", "gris", "verde", "blanco"];
 let intentos = 1;
 
 function validarUsuario() {
@@ -62,12 +61,6 @@ function seleccionarColor() {
   let color = prompt(
     "¿Qué color quiere para su remera? (Indique colocando el nombre del color) \n Rojo \n Negro \n Gris \n Verde \n Blanco "
   );
-  while (!coloresPermitidos.includes(color) || typeof color !== "string") {
-    color = prompt(
-      "El color ingresado no es válido. Por favor, seleccione un color de la lista: " +
-        coloresPermitidos.join(", ")
-    );
-  }
   alert("Seleccionaste " + color + ", perfecto!");
 }
 
