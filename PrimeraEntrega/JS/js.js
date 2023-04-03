@@ -35,6 +35,8 @@ Correccion
 
 let usuario = "usuario";
 let contrasena = "admin";
+const coloresPermitidos = ["rojo", "negro", "gris", "verde", "blanco","Rojo", "Negro", "Gris", "Verde", "Blanco"];
+const tamañosPermitidos = ["XXL", "XL", "L", "M", "S"];
 let intentos = 1;
 
 function validarUsuario() {
@@ -44,7 +46,7 @@ function validarUsuario() {
   while (intentos < 3) {
     if (usuarioIngresado === usuario && contrasenaIngresada === contrasena) {
       mostrarBienvenida();
-      seleccionarColor();
+      seleccionarRopa();
       mostrarDespedida();
       return;
     } else {
@@ -57,11 +59,23 @@ function validarUsuario() {
   alert("Has excedido el número de intentos permitidos");
 }
 
-function seleccionarColor() {
+function seleccionarRopa() {
   let color = prompt(
-    "¿Qué color quiere para su remera? (Indique colocando el nombre del color) \n Rojo \n Negro \n Gris \n Verde \n Blanco "
-  );
-  alert("Seleccionaste " + color + ", perfecto!");
+    "¿Qué color quiere para su remera? (Indique colocando el nombre del color) \n rojo \n negro \n gris \n verde \n blanco ");
+    while (!coloresPermitidos.includes(color) || typeof color !== "string") {
+      color = prompt(
+        "El color ingresado no es válido. Por favor, seleccione un color de la lista: (Indique colocando el nombre del color)  \n rojo \n negro \n gris \n verde \n blanco"
+      );
+  
+    }
+  let tamaños = prompt (
+    "¿Y que tamaño lo quiere? (Indique colocando el valor) \n XXL \n XL \n L \n M \n S");
+    while (!tamañosPermitidos.includes(tamaños) || typeof tamaños !== "string") {
+      tamaños = prompt(
+        "El tamaño ingresado no es válido. Por favor, seleccione un tamaño de la lista: (Indique colocando el nombre del color) \n XXL \n XL \n L \n M \n S"
+      );
+    }
+  alert("Seleccionaste " + color + " " + tamaños + ", perfecto!");
 }
 
 function mostrarBienvenida() {
