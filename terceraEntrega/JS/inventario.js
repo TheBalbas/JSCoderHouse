@@ -65,13 +65,13 @@ const Inventario = [
 let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
 
 
-function ropa(prenda, color, codigo, tamaño, cantidad, precio, img) {
+function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
   this.prenda = prenda;
   this.color = color;
   this.codigo = codigo;
   this.tamaño = tamaño;
-  this.cantidad = cantidad; 
   precio == "" ? (this.precio = 1) : (this.precio = precio);
+  this.cantidad = cantidad; 
   img == "" ? (this.img = `https://via.placeholder.com/150`) : (this.img = img);
 }
 
@@ -187,8 +187,7 @@ formInventario.addEventListener("submit", (e) => {
     tamaño.value,
     precio.value,
     cantidad.value,
-    img.value
-    
+    img.value,
   )
   M.toast({html: 'Se guardo una nueva prenda'});
 
