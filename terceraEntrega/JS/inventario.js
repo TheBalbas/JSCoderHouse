@@ -48,7 +48,7 @@ const Inventario = [
     tamaño: "S", 
     precio: "6500",
     cantidad: "10",
-    img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/070/999/products/1hombre-one-piece-7-amarillo-6b17c32e7754e7770e15858441371513-1024-1024-8d9c006c61fd61e70216631025243831-1024-1024.webp" ,
+    img: "https://www.dhresource.com/0x0/f2/albu/g21/M00/94/44/rBVaq2Doj_yAEFn5AABuacNpWA4001.jpg" ,
   },
   {
     prenda: "Pantalon Akatsuki",
