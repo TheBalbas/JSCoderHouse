@@ -7,7 +7,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     let username = document.querySelector('#username').value;
     let password = document.querySelector('#password').value;
     if (username === 'admin' && password === 'pass123') {
-        window.location.href = 'terceraEntrega/HTML/inventario.html' } else {
+        window.location.href = 'entregaFinal/HTML/inventario.html' } else {
         M.toast({html: 'Incorrect username or password'});
     }
 });
