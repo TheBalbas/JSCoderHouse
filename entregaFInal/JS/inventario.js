@@ -16,11 +16,14 @@ const radios = document.querySelectorAll('input[type="radio"]');
 const Inventario = "../DATA/inventario.json"
 fetch(Inventario)
 .then (res => res.json())
-.then (Inventario => console.log(Inventario))
+.then (Inventario => {
+  ropas = Inventario;
+  crearHtml(ropas);
+})
 .catch(error => console.error(error));
 
 
-let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
+
 
 
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
