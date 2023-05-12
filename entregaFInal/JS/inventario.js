@@ -93,28 +93,39 @@ function validarDatos(nuevaRopa) {
 
 function crearHtml(arr) {
   tbody.innerHTML = "";
-
+  
   let html = "";
   for (const item of arr) {
     const { prenda, color, codigo, tamaño, precio, cantidad, img } = item;
     html = `<tr>
-<td>${prenda}</td>
-<td>${color}</td>
-<td>${codigo}</td>
-<td>${tamaño}</td>
-<td>${precio}</td>
-<td>
-  <button class="btn green" id="sumar-${codigo}">+</button>
-  <button class="btn red" id="restar-${codigo}">-</button>
-  <span id="cantidad-${codigo}">${cantidad}</span>
-</td>
-<td><img src="${img}"/></td>
-<td><button class="btn red" id="${codigo}">Borrar</button></td>
-<td><button class="btn orange" id="${codigo}-modificar-precio">Modificar precio</button></td>
-</tr>`;
+  <td>${prenda}</td>
+  <td>${color}</td>
+  <td>${codigo}</td>
+  <td>${tamaño}</td>
+  <td>${precio}</td>
+  <td>
+    <button class="btn green" id="sumar-${codigo}">+</button>
+    <button class="btn red" id="restar-${codigo}">-</button>
+    <span id="cantidad-${codigo}">${cantidad}</span>
+  </td>
+  <td><img src="${img}"/></td>
+  <td><button class="btn red" id="${codigo}">Borrar</button></td>
+  <td><button class="btn orange" id="${codigo}-modificar-precio">Modificar precio</button></td>
+  </tr>`;
     tbody.innerHTML += html;
   }
-
+  const sumarBotones = document.querySelectorAll("td .btn.green");
+  const restarBotones = document.querySelectorAll("td .btn.red");
+  sumarBotones.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const codigo = btn.id.split("-")[1];
+      const prenda = ropas.find((el) => el.codigo === codigo);
+      prenda.cantidad++;
+      guardarLS(ropas);
+      crearHtml(ropas);
+    });
+  });
+  
   restarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
       const codigo = btn.id.split("-")[1];
@@ -126,11 +137,12 @@ function crearHtml(arr) {
       }
     });
   });
-
+  
   const arrayBotones = document.querySelectorAll("td .btn");
   arrayBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (btn.id.includes("-modificar-precio")) {
+  
         const codigo = btn.id.split("-")[0];
         const item = ropas.find((el) => el.codigo == codigo);
         const nuevoPrecio = prompt("Ingrese el nuevo precio:");
@@ -138,16 +150,18 @@ function crearHtml(arr) {
           item.precio = parseFloat(nuevoPrecio);
           guardarLS(ropas);
           crearHtml(ropas);
-          M.toast({ html: "El precio se modifico" });
+          M.toast({html: 'El precio se modifico'})
         }
       } else {
         ropas = ropas.filter((el) => el.codigo != btn.id);
         guardarLS(ropas);
         crearHtml(ropas);
+  
       }
     });
   });
-}
+  }
+  
 function ordenar(arr, tipo) {
   if (tipo === "ascendente") {
     return arr.sort((a, b) => a.precio - b.precio);
