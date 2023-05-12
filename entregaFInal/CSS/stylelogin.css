@@ -1,8 +1,6 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
-body{
-    background-image: url('../IMG/Login.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-
-  }
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap");
+body {
+  background-image: url("../IMG/Login.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
