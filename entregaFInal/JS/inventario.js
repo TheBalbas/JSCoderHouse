@@ -10,22 +10,27 @@ const search = document.querySelector("#search");
 const tbody = document.querySelector("#table-body");
 const formInventario = document.querySelector("#formInventario");
 const radios = document.querySelectorAll('input[type="radio"]');
-const sumarBotones = document.querySelectorAll("td .btn.green");
-const restarBotones = document.querySelectorAll("td .btn.red");
+const sumarBotones = document.querySelectorAll("td .green");
+const restarBotones = document.querySelectorAll("td .red");
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
 
 let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
 //fetch
-Inventario = "../DATA/inventario.json";
-fetch(Inventario)
-  .then((res) => res.json())
-  .then((Inventario) => {
-    ropas = Inventario;
+const carga = async () => {
+  try {
+    const res = await fetch("../DATA/inventario.json");
+    const inventario = await res.json();
+    ropas = inventario;
     crearHtml(ropas);
-  })
-  .catch((error) => console.error(error));
+  } catch (error) {
+    console.error(error);
+  }
+};
+carga();
 //funciones
+
+
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
   this.prenda = prenda;
   this.color = color;
