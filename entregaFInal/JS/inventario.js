@@ -24,6 +24,7 @@ fetch(Inventario)
 
 
 
+let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
 
 
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
@@ -176,6 +177,3 @@ radio.addEventListener("change", () => {
   }
 });
 }
-
-
-
