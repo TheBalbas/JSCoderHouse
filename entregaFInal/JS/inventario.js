@@ -12,20 +12,33 @@ const formInventario = document.querySelector("#formInventario");
 const radios = document.querySelectorAll('input[type="radio"]');
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
-
 let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
-//fetch
-const carga = async () => {
+
+//promise
+const carga = () => {
+  return new Promise((resolve, reject) => {
+    fetch("../DATA/inventario.json")
+      .then((res) => {
+        if (res.ok) {
+          resolve(res.json());
+        } else {
+          reject(`HTTP error! status: ${res.status}`);
+        }
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+const cargarInventario = async () => {
   try {
-    const res = await fetch("../DATA/inventario.json");
-    const inventario = await res.json();
+    const inventario = await carga();
     ropas = inventario;
     crearHtml(ropas);
   } catch (error) {
     console.error(error);
   }
 };
-carga();
+cargarInventario();
 //funciones
 
 
@@ -38,7 +51,7 @@ function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
   this.cantidad = cantidad;
   img == "" ? (this.img = `https://via.placeholder.com/150`) : (this.img = img);
 }
-function cargarInventario(arr, ropa) {
+function pushInventario(arr, ropa) {
   arr.push(ropa);
 }
 function guardarLS(arr) {
