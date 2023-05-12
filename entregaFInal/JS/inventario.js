@@ -17,15 +17,19 @@ let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
 //promise
 const carga = () => {
   return new Promise((resolve, reject) => {
-    fetch("../DATA/inventario.json")
-      .then((res) => {
-        if (res.ok) {
-          resolve(res.json());
-        } else {
-          reject(`HTTP error! status: ${res.status}`);
-        }
-      })
-      .catch((error) => reject(error));
+    const dato = new XMLHttpRequest();
+    dato.open("GET", "../DATA/inventario.json");
+    dato.onload = function () {
+      if (dato.status === 200) {
+        resolve(JSON.parse(dato.responseText));
+      } else {
+        reject(`HTTP error! status: ${dato.status}`);
+      }
+    };
+    dato.onerror = function () {
+      reject("Network error");
+    };
+    dato.send();
   });
 };
 
@@ -38,7 +42,6 @@ const cargarInventario = async () => {
     console.error(error);
   }
 };
-cargarInventario();
 //funciones
 
 
@@ -181,8 +184,8 @@ function ordenar(arr, tipo) {
   }
 }
 //event listeners
-formInventario.addEventListener("submit", (e) => {
-  e.preventDefault();
+formInventario.addEventListener("submit", (event) => {
+  event.preventDefault();
   const nuevaRopa = new ropa(
     prenda.value,
     color.value,
@@ -193,14 +196,15 @@ formInventario.addEventListener("submit", (e) => {
     img.value
   );
   if (validarDatos(nuevaRopa)) {
-    cargarInventario(ropas, nuevaRopa);
+    pushInventario(ropas, nuevaRopa);
     guardarLS(ropas);
     crearHtml(ropas);
-    M.toast({ html: "Se guardo una nueva prenda" });
-    formInventario.reset();
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  cargarInventario();
+});
 search.addEventListener("input", () => {
   let nuevoFiltro = filtrar(ropas, search.value, "prenda");
   crearHtml(nuevoFiltro);
