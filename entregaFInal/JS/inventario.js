@@ -10,8 +10,6 @@ const search = document.querySelector("#search");
 const tbody = document.querySelector("#table-body");
 const formInventario = document.querySelector("#formInventario");
 const radios = document.querySelectorAll('input[type="radio"]');
-const sumarBotones = document.querySelectorAll("td .btn.green");
-const restarBotones = document.querySelectorAll("td .btn.red");
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
 
@@ -195,15 +193,6 @@ search.addEventListener("input", () => {
   crearHtml(nuevoFiltro);
 });
 
-sumarBotones.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const codigo = btn.id.split("-")[1];
-    const prenda = ropas.find((el) => el.codigo === codigo);
-    prenda.cantidad++;
-    guardarLS(ropas);
-    crearHtml(ropas);
-  });
-});
 btnAscendente.addEventListener("click", () => {
   const ordenado = ordenar(ropas, "ascendente");
   crearHtml(ordenado);
