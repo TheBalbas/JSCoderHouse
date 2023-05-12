@@ -125,9 +125,6 @@ function crearHtml(arr) {
     });
   });
 }
-
-crearHtml(ropas);
-
 formInventario.addEventListener("submit", (e) => {
   e.preventDefault();
   const nuevaRopa = new ropa(
@@ -162,3 +159,5 @@ for (const radio of radios) {
     }
   });
 }
+
+crearHtml(ropas);
