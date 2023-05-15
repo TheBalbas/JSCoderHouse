@@ -12,7 +12,7 @@ const formInventario = document.querySelector("#formInventario");
 const radios = document.querySelectorAll('input[type="radio"]');
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
-let ropas = JSON.parse(localStorage.getItem("Inventario")) || [];
+let ropas = JSON.parse(localStorage.getItem("Inventario"));
 //promise
 const carga = () => {
   return new Promise((resolve, reject) => {
