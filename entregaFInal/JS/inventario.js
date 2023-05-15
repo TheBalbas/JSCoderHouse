@@ -33,20 +33,6 @@ const carga = () => {
   });
 };
 
-const loading = document.querySelector("#loading");
-
-const cargarInventario = async () => {
-  try {
-    loading.style.display = "flex"; 
-    const inventario = await carga();
-    ropas = inventario;
-    crearHtml(ropas);
-    loading.style.display = "none"; 
-  } catch (error) {
-    console.error(error);
-    loading.style.display = "none"; 
-  }
-};
 //funciones
 
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
@@ -218,6 +204,9 @@ function ordenar(arr, tipo) {
     return arr.sort((a, b) => b.precio - a.precio);
   }
 }
+//funcion principal
+crearHtml(ropas);
+
 //event listeners
 formInventario.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -237,9 +226,6 @@ formInventario.addEventListener("submit", (event) => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  cargarInventario();
-});
 search.addEventListener("input", () => {
   let nuevoFiltro = filtrar(ropas, search.value, "prenda");
   crearHtml(nuevoFiltro);
@@ -266,5 +252,3 @@ for (const radio of radios) {
   });
 }
 
-//funcion principal
-crearHtml(ropas);
