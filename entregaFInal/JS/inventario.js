@@ -13,7 +13,6 @@ const radios = document.querySelectorAll('input[type="radio"]');
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
 let ropas = JSON.parse(localStorage.getItem("Inventario")) || [];
-
 //promise
 const carga = () => {
   return new Promise((resolve, reject) => {
@@ -32,9 +31,7 @@ const carga = () => {
     dato.send();
   });
 };
-
 //funciones
-
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
   this.prenda = prenda;
   this.color = color;
@@ -206,7 +203,6 @@ function ordenar(arr, tipo) {
 }
 //funcion principal
 crearHtml(ropas);
-
 //event listeners
 formInventario.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -251,4 +247,3 @@ for (const radio of radios) {
     }
   });
 }
-
