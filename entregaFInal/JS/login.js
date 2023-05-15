@@ -3,14 +3,10 @@ $(document).ready(function () {
     event.preventDefault();
     let username = $("#username").val();
     let password = $("#password").val();
-    $("#loading").addClass("show");
     if (username === "admin" && password === "123") {
-      setTimeout(function () {
-        window.location.href = "entregaFinal/HTML/inventario.html";
-      }, 1500);
+      window.location.href = "entregaFinal/HTML/inventario.html";
     } else {
-      M.toast({ html: "Nombre de usuario o contraseña incorrectos" });
+      M.toast({ html: "Incorrect username or password" });
     }
-    $("#loading").removeClass("show");
   });
 });
