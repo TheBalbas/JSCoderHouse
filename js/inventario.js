@@ -203,6 +203,7 @@ function ordenar(arr, tipo) {
   }
 }
 //funcion principal
+carga();
 crearHtml(ropas);
 //event listeners
 formInventario.addEventListener("submit", (event) => {
