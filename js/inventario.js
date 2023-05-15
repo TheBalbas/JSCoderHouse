@@ -26,6 +26,7 @@ const carga = () => {
       }
     };
     dato.onerror = function () {
+      console.log("Error de red");
       reject("Network error");
     };
     dato.send();
