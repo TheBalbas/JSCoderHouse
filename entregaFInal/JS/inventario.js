@@ -155,6 +155,16 @@ function crearHtml(arr) {
       }
     });
   });
+  const botonesBorrar = document.querySelectorAll("td .btn.red");
+botonesBorrar.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const codigo = btn.id;
+    const index = ropas.findIndex((el) => el.codigo === codigo);
+    ropas.splice(index, 1);
+    guardarLS(ropas);
+    crearHtml(ropas);
+  });
+});
   const editarBotones = document.querySelectorAll("td .btn.orange");
   editarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
