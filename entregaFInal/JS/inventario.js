@@ -12,7 +12,7 @@ const formInventario = document.querySelector("#formInventario");
 const radios = document.querySelectorAll('input[type="radio"]');
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
-let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
+let ropas = JSON.parse(localStorage.getItem("Inventario")) || [];
 
 //promise
 const carga = () => {
@@ -20,7 +20,7 @@ const carga = () => {
     const dato = new XMLHttpRequest();
     dato.open("GET", "../data/inventario.json");
     dato.onload = function () {
-      if (dato.status === 500) {
+      if (dato.status === 200) {
         resolve(JSON.parse(dato.responseText));
       } else {
         reject(`HTTP error! status: ${dato.status}`);
