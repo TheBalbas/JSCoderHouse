@@ -98,7 +98,7 @@ function crearHtml(arr) {
   <td>${precio}</td>
   <td>
     <button class="btn green" id="sumar-${codigo}">+</button>
-    <button class="btn red" id="restar-${codigo}">-</button>
+    <button class="btn black" id="restar-${codigo}">-</button>
     <span id="cantidad-${codigo}">${cantidad}</span>
   </td>
   <td><img src="${img}"/></td>
@@ -107,8 +107,8 @@ function crearHtml(arr) {
   </tr>`;
     tbody.innerHTML += html;
   }
+  // Sumar
   const sumarBotones = document.querySelectorAll("td .btn.green");
-  const restarBotones = document.querySelectorAll("td .btn.red");
   sumarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
       const codigo = btn.id.split("-")[1];
@@ -119,27 +119,32 @@ function crearHtml(arr) {
     });
   });
 
-  restarBotones.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const codigo = btn.id.split("-")[1];
-      const prenda = ropas.find((el) => el.codigo === codigo);
-      if (prenda.cantidad > 0) {
-        prenda.cantidad--;
-        guardarLS(ropas);
-        crearHtml(ropas);
-      }
-    });
+// Restar 
+const restarBotones = document.querySelectorAll("td .btn.black");
+restarBotones.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const codigo = btn.id.split("-")[1];
+    const prenda = ropas.find((el) => el.codigo === codigo);
+    if (prenda.cantidad > 0) {
+      prenda.cantidad--;
+      guardarLS(ropas);
+      crearHtml(ropas);
+    }
   });
-  const botonesBorrar = document.querySelectorAll("td .btn.red");
+});
+
+// Borrar 
+const botonesBorrar = document.querySelectorAll("td .btn.red");
 botonesBorrar.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const codigo = btn.id;
+    const codigo = btn.parentNode.parentNode.querySelector("td:nth-child(3)").textContent;
     const index = ropas.findIndex((el) => el.codigo === codigo);
     ropas.splice(index, 1);
     guardarLS(ropas);
     crearHtml(ropas);
   });
 });
+// Editar
   const editarBotones = document.querySelectorAll("td .btn.orange");
   editarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
