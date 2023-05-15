@@ -18,7 +18,7 @@ let ropas = JSON.parse(localStorage.getItem("Inventario")) || Inventario;
 const carga = () => {
   return new Promise((resolve, reject) => {
     const dato = new XMLHttpRequest();
-    dato.open("GET", "../DATA/inventario.json");
+    dato.open("GET", "../data/inventario.json");
     dato.onload = function () {
       if (dato.status === 200) {
         resolve(JSON.parse(dato.responseText));
