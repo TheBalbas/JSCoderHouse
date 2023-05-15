@@ -20,7 +20,7 @@ const carga = () => {
     const dato = new XMLHttpRequest();
     dato.open("GET", "../data/inventario.json");
     dato.onload = function () {
-      if (dato.status === 200) {
+      if (dato.status === 500) {
         resolve(JSON.parse(dato.responseText));
       } else {
         reject(`HTTP error! status: ${dato.status}`);
