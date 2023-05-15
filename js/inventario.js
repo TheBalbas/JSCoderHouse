@@ -12,27 +12,18 @@ const formInventario = document.querySelector("#formInventario");
 const radios = document.querySelectorAll('input[type="radio"]');
 const btnAscendente = document.querySelector("#ordenar-ascendente");
 const btnDescendente = document.querySelector("#ordenar-descendente");
-let ropas = JSON.parse(localStorage.getItem("Inventario"));
-//promise
-const carga = () => {
-  return new Promise((resolve, reject) => {
-    const dato = new XMLHttpRequest();
-    dato.open("GET", "../data/inventario.json");
-    dato.onload = function () {
-      if (dato.status === 200) {
-        resolve(JSON.parse(dato.responseText));
-      } else {
-        reject(`HTTP error! status: ${dato.status}`);
-      }
-    };
-    dato.onerror = function () {
-      console.log("Error de red");
-      reject("Network error");
-    };
-    dato.send();
+const url = "../data/inventario.json"
+let ropas = JSON.parse(localStorage.getItem("Inventario")) || [];
+
+//fetch
+fetch(url)
+  .then(res => res.json())
+  .then(ropasData => {
+    ropas = ropasData;
+    crearHtml(ropas);
   });
-};
 //funciones
+
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
   this.prenda = prenda;
   this.color = color;
@@ -203,14 +194,7 @@ function ordenar(arr, tipo) {
   }
 }
 //funcion principal
-carga()
-  .then((data) => {
-    ropas = data; 
-    crearHtml(ropas); 
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+ crearHtml(ropas); 
 //event listeners
 formInventario.addEventListener("submit", (event) => {
   event.preventDefault();
