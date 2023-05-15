@@ -1,14 +1,16 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let elems = document.querySelectorAll('.modal');
-    let instances = M.Modal.init(elems);
-});
-document.querySelector('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    let username = document.querySelector('#username').value;
-    let password = document.querySelector('#password').value;
-    if (username === 'admin' && password === 'pass123') {
-        window.location.href = 'entregaFinal/HTML/inventario.html'
+$(document).ready(function () {
+  $("form").submit(function (event) {
+    event.preventDefault();
+    let username = $("#username").val();
+    let password = $("#password").val();
+    $("#loading").addClass("show");
+    if (username === "admin" && password === "123") {
+      setTimeout(function () {
+        window.location.href = "entregaFinal/HTML/inventario.html";
+      }, 1500);
     } else {
-        M.toast({ html: 'Incorrect username or password' });
+      M.toast({ html: "Nombre de usuario o contraseña incorrectos" });
     }
+    $("#loading").removeClass("show");
+  });
 });

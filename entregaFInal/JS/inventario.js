@@ -33,17 +33,21 @@ const carga = () => {
   });
 };
 
+const loading = document.querySelector("#loading");
+
 const cargarInventario = async () => {
   try {
+    loading.style.display = "flex"; 
     const inventario = await carga();
     ropas = inventario;
     crearHtml(ropas);
+    loading.style.display = "none"; 
   } catch (error) {
     console.error(error);
+    loading.style.display = "none"; 
   }
 };
 //funciones
-
 
 function ropa(prenda, color, codigo, tamaño, precio, cantidad, img) {
   this.prenda = prenda;
@@ -107,7 +111,7 @@ function validarDatos(nuevaRopa) {
 
 function crearHtml(arr) {
   tbody.innerHTML = "";
-  
+
   let html = "";
   for (const item of arr) {
     const { prenda, color, codigo, tamaño, precio, cantidad, img } = item;
@@ -124,7 +128,7 @@ function crearHtml(arr) {
   </td>
   <td><img src="${img}"/></td>
   <td><button class="btn red" id="${codigo}">Borrar</button></td>
-  <td><button class="btn orange" id="${codigo}-modificar-precio">Modificar precio</button></td>
+  <td><button class="btn orange" id="${codigo}-editar-producto">Editar Producto</button></td>
   </tr>`;
     tbody.innerHTML += html;
   }
@@ -139,7 +143,7 @@ function crearHtml(arr) {
       crearHtml(ropas);
     });
   });
-  
+
   restarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
       const codigo = btn.id.split("-")[1];
@@ -151,31 +155,52 @@ function crearHtml(arr) {
       }
     });
   });
-  
-  const arrayBotones = document.querySelectorAll("td .btn");
-  arrayBotones.forEach((btn) => {
+  const editarBotones = document.querySelectorAll("td .btn.orange");
+  editarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (btn.id.includes("-modificar-precio")) {
-  
-        const codigo = btn.id.split("-")[0];
-        const item = ropas.find((el) => el.codigo == codigo);
-        const nuevoPrecio = prompt("Ingrese el nuevo precio:");
-        if (nuevoPrecio) {
-          item.precio = parseFloat(nuevoPrecio);
-          guardarLS(ropas);
-          crearHtml(ropas);
-          M.toast({html: 'El precio se modifico'})
-        }
-      } else {
-        ropas = ropas.filter((el) => el.codigo != btn.id);
+      const codigo = btn.id.split("-")[0];
+      const item = ropas.find((el) => el.codigo == codigo);
+      const formHtml = `
+      <form id="editar-form" class="formulario">
+        <label for="prenda">Prenda:</label>
+        <input type="text" id="prenda" name="prenda" value="${item.prenda}" required>
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" value="${item.color}" required>
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" name="codigo" value="${item.codigo}" required>
+        <label for="tamaño">Tamaño:</label>
+        <input type="text" id="tamaño" name="tamaño" value="${item.tamaño}" required>
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" value="${item.precio}" required>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" value="${item.cantidad}" required>
+        <label for="imagen">Imagen:</label>
+        <input type="text" id="imagen" name="imagen" value="${item.img}" required>
+        <button type="submit" class="btn green">Guardar</button>
+      </form>
+    `;
+      const tr = btn.parentNode.parentNode;
+      tr.innerHTML = `<td colspan="9">${formHtml}</td>`;
+
+      const form = document.querySelector("#editar-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        item.prenda = form.prenda.value;
+        item.color = form.color.value;
+        item.codigo = form.codigo.value;
+        item.tamaño = form.tamaño.value;
+        item.precio = parseFloat(form.precio.value);
+        item.cantidad = parseInt(form.cantidad.value);
+        item.img = form.imagen.value;
+
         guardarLS(ropas);
         crearHtml(ropas);
-  
-      }
+        M.toast({ html: "El producto se actualizó" });
+      });
     });
   });
-  }
-  
+}
+
 function ordenar(arr, tipo) {
   if (tipo === "ascendente") {
     return arr.sort((a, b) => a.precio - b.precio);
