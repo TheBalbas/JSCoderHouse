@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap");
+
+
+
 * {
   margin: 0;
   padding: 0;
@@ -6,92 +9,84 @@
   font-family: "Raleway", sans-serif;
   text-decoration: none;
 }
+
 td {
   text-transform: capitalize;
+  padding: 2px;
 }
+
 td img {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 200px;
+  max-height: 200px;
 }
-h1 {
-  position: relative;
-  padding: 0;
-  margin: 5;
+
+.header {
+  background-color: #b80000;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-title {
   font-family: "Raleway", sans-serif;
-  font-weight: 300;
-  font-size: 40px;
-  color: #080808;
-  -webkit-transition: all 0.4s ease 0s;
-  -o-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s;
-}
-h1 span {
-  display: block;
-  font-size: 0.5em;
-  line-height: 1.3;
-}
-h1 em {
-  font-style: normal;
   font-weight: 600;
-}
-.one h1 {
-  text-align: center;
-  text-transform: uppercase;
-  padding-bottom: 5px;
-}
-.one h1:before {
-  width: 28px;
-  height: 5px;
-  display: block;
-  content: "";
-  position: absolute;
-  bottom: 3px;
-  left: 50%;
-  margin-left: -14px;
-  background-color: #b80000;
-}
-.one h1:after {
-  width: 100px;
-  height: 1px;
-  display: block;
-  content: "";
-  position: relative;
-  margin-top: 25px;
-  left: 50%;
-  margin-left: -50px;
-  background-color: #b80000;
-}
-h3 {
-  position: relative;
-  padding: 0;
-  margin: 5;
-  font-family: "Raleway", sans-serif;
-  font-weight: 300;
-  font-size: 40px;
+  font-size: 24px;
   color: #080808;
-  -webkit-transition: all 0.4s ease 0s;
-  -o-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s;
+  margin-bottom: 10px;
 }
-.four h3 {
-  text-align: center;
-  padding-bottom: 0.7em;
+
+.card-content {
+  padding: 40px;
 }
-.four h3 span {
-  font-weight: 300;
-  word-spacing: 3px;
-  line-height: 2em;
-  padding-bottom: 0.35em;
-  color: rgba(0, 0, 0, 0.5);
+
+.input-field label {
+  color: #888;
 }
-.four h3:before {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 60px;
-  height: 1px;
-  content: "";
-  left: 50%;
-  margin-left: -30px;
-  background-color: #777;
+
+.input-field input[type="text"]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+
+.btn {
+  margin-top: 10px;
+  background-color: #b80000;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #8c0000;
+}
+
+.btn.blue {
+  background-color: #1565c0;
+}
+
+.btn.blue:hover {
+  background-color: #0d47a1;
+}
+.responsive-table {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: 15px;
+}
+
+.responsive-table td img {
+  max-width: 100%;
+  height: auto;
 }

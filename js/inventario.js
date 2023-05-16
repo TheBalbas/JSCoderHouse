@@ -107,8 +107,8 @@ function crearHtml(arr) {
   </tr>`;
     tbody.innerHTML += html;
   }
-  // Sumar
   const sumarBotones = document.querySelectorAll("td .btn.green");
+  const restarBotones = document.querySelectorAll("td .btn.black");
   sumarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
       const codigo = btn.id.split("-")[1];
@@ -119,32 +119,27 @@ function crearHtml(arr) {
     });
   });
 
-// Restar 
-const restarBotones = document.querySelectorAll("td .btn.black");
-restarBotones.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const codigo = btn.id.split("-")[1];
-    const prenda = ropas.find((el) => el.codigo === codigo);
-    if (prenda.cantidad > 0) {
-      prenda.cantidad--;
-      guardarLS(ropas);
-      crearHtml(ropas);
-    }
+  restarBotones.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const codigo = btn.id.split("-")[1];
+      const prenda = ropas.find((el) => el.codigo === codigo);
+      if (prenda.cantidad > 0) {
+        prenda.cantidad--;
+        guardarLS(ropas);
+        crearHtml(ropas);
+      }
+    });
   });
-});
-
-// Borrar 
-const botonesBorrar = document.querySelectorAll("td .btn.red");
+  const botonesBorrar = document.querySelectorAll("td .btn.red");
 botonesBorrar.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const codigo = btn.parentNode.parentNode.querySelector("td:nth-child(3)").textContent;
+    const codigo = btn.id;
     const index = ropas.findIndex((el) => el.codigo === codigo);
     ropas.splice(index, 1);
     guardarLS(ropas);
     crearHtml(ropas);
   });
 });
-// Editar
   const editarBotones = document.querySelectorAll("td .btn.orange");
   editarBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
